@@ -9,15 +9,16 @@
 */
 bool checkletter(char* guessword, char letter, char* word, int len)
 {
-    int i;
+	int i;
 
-    for (i = 0; i < len; i++)
-    {
-        if (word[i] == letter)
-        {
-            guessword[i] = letter;
-            return (true);
-        }
-    }
-    return (false);
+	for (i = 0; i < len; i++)
+	{
+		if (word[i] == letter)
+		{
+			guessword[i] = letter;
+			return (true);
+		}
+	}
+
+	return (false);
 }

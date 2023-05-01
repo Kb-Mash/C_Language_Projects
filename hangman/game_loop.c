@@ -16,24 +16,27 @@ void hangman(char* word, char* guessword, int len)
         printword(guessword);
         printf("\nGuess Letter: ");
         scanf("%c", &letter);
+	getchar();
 
-        if (!checkletter(guessword, letter, word, len))
+        if (checkletter(guessword, letter, word, len))
         {
-            tries++;
+		lettercorrect++;
+
         }
         else
         {
-            printf("\nIncorrect. You have guesses left\n");
-            lettercorrect++;
+            printf("\nIncorrect. You have %d guesses left\n", max_tries - tries - 1);
+            tries++;
         }
     } while (lettercorrect < len && tries < max_tries);
 
     if (lettercorrect == len)
     {
-        printf("Congratulations!\n");
+	printword(guessword);
+        printf("\nCongratulations!\n");
     }
     else
     {
-        printf("\nGuessed wrong. The word was %s/n", word);
+        printf("\nGuessed wrong. The word was %s\n", word);
     }
 }

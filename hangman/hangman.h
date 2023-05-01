@@ -9,7 +9,7 @@
 
 /* function prototypes */
 char* randomword(char* words[], int size);
-void init_word(char** guessword, int len);
+void init_word(char* guessword, int len);
 bool checkletter(char* guessword, char letter, char* word, int len);
 void hangman(char* word, char* guessword, int len);
 void printword(char* guessword);

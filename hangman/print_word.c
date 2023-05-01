@@ -8,11 +8,12 @@
 */
 void printword(char* guessword)
 {
-    int i;
+    int i = 0;
 
+    printf("\n");
     while (guessword[i] != '\0')
     {
-        printf("%c", guessword[i]);
+        printf("%c ", guessword[i]);
         i++;
     }
     printf("\n");
