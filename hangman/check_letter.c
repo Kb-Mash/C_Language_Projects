@@ -15,7 +15,6 @@ bool checkletter(char* guessword, char letter, char* word, int len)
 	{
 		if (word[i] == letter)
 		{
-			guessword[i] = letter;
 			return (true);
 		}
 	}

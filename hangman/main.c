@@ -6,15 +6,18 @@
 */
 int main()
 {
-	char *words[] = {"hello", "hopeful", "python", "danger", "welcome", "input", "delusional", "occassion", "movies", "ticket"};
+	char *words[] = {"pointer", "function", "loop", "python",
+		"pseudocode", "malloc", "enums", "union", "cybersecurity", "process"};
 	int size = sizeof(words) / sizeof(words[0]);
-	char *word = randomword(words, size), *guessword = NULL;
-	int len = strlen(word);
+	char *word = NULL, *guessword = NULL;
+	int len;
 
-	guessword = malloc(len + 1);
-	init_word(guessword, len);
+	randomword(&word, words, size);
+	len = strlen(word);
+	init_word(&guessword, len);
 	hangman(word, guessword, len);
 
+	free(word);
 	free(guessword);
 	return (0);
 }

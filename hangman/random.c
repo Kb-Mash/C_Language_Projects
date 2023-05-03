@@ -6,8 +6,14 @@
  * @size: size of the list of words
  * Return: a word picked at random 
 */
-char* randomword(char* words[], int size)
+char** randomword(char** word, char* words[], int size)
 {
-    int i = rand() % size;
-    return (words[i]);
+	int i;
+	srand(time(NULL));
+
+	i = rand() % size;
+	*word = strdup(words[i]);
+
+	return (word);
+
 }
