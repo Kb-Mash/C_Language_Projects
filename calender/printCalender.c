@@ -27,9 +27,6 @@ void print_calender(int month, int year)
 			printf("\n");
 		}
 	}
-	if (spaces)
-		printf("\n");
-	weekday = spaces;
 
 	printf("\n");
 }
