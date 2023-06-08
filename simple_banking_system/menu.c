@@ -1,33 +1,53 @@
 #include "header.h"
 
+/**
+ * print_display - displays the menu
+*/
 void print_display()
 {
-    printf("\n----------bank system----------\n");
+    printf("\n-------------ATM-------------\n");
     printf("\nPlease choose an option\n");
     printf("\n\t[1] Deposit\n");
     printf("\t[2] Withdraw\n");
-    printf("\t[3] View Balance\n\n");
+    printf("\t[3] View Balance\n");
+    printf("\t[4] Exit\n\n");
 }
 
+
+/**
+ * check_accountNum - gets account number from user and checks
+ * if it matches the account number stored
+ * @holder: account struct
+*/
 void check_accountNum(account *holder)
 {
     char accountNumber[50];
 
-    printf("\nPlease be aware that we are not liable if account number is incorrect\n");
+    printf("\n--------------Deposit-------------\n");
+    printf("\nPlease be aware that we are not liable\nif account number is incorrect\n");
+    printf("\n----------------------------------\n");
     printf("\nEnter 8-digit account number: ");
     scanf("%s", accountNumber);
 
     if (strcmp(holder->accountNum, accountNumber) == 0)
     {
-        deposit_func(holder);
+        deposit_func(holder, accountNumber);
+        menu(holder);
         return;
     }
     else
     {
+        incorrect_accountNum(accountNumber, holder);
         return;
     }
 }
 
+/**
+ * check_pin - gets account pin from user and checks
+ * if it matches the account pin stored
+ * @holder: account struct
+ * Return: 0 if correct
+*/
 int check_pin(account *holder)
 {
     char pinNum[10];
@@ -45,6 +65,10 @@ int check_pin(account *holder)
             --tries;
             printf("\nIncorrect pin\n");
             printf("You have %d attempts left\n", tries);
+            if (cancel_transaction(holder) != 0)
+            {
+                return (1);
+            }
         }
         else
             return (0);
@@ -55,6 +79,12 @@ int check_pin(account *holder)
     return (1);
 }
 
+/**
+ * check_cardNum - gets card number from user and checks
+ * if it matches the card number stored
+ * @holder: account struct
+ * Return: 0 if correct
+*/
 int check_cardNum(account *holder)
 {
     char cardNum[20];
@@ -78,7 +108,7 @@ int check_cardNum(account *holder)
         {
             printf("\nIncorrect card number\n");
 
-            if (cancel_transaction(holder) != 0)
+            if (cancel_transaction(holder) == 0)
             {
                 continue;
             }
@@ -91,6 +121,10 @@ int check_cardNum(account *holder)
     } while (1);
 }
 
+/**
+ * menu - calls the functions based on the option entered
+ * @holder: account struct
+*/
 void menu(account *holder)
 {
     int option;
@@ -101,7 +135,7 @@ void menu(account *holder)
     {
         printf("Enter option: ");
         scanf("%d", &option);
-    } while (option <= 0 || option > 3);
+    } while (option <= 0 || option > 4);
 
     if (option == 1)
         check_accountNum(holder);
@@ -111,7 +145,9 @@ void menu(account *holder)
         {
             if (option == 2)
             {
+                printf("\n-----------Withdraw----------\n");
                 withdraw_func(holder);
+                menu(holder);
                 return;
             }
             else if (option == 3)
@@ -124,5 +160,9 @@ void menu(account *holder)
         {
             menu(holder);
         }
+    }
+    else
+    {
+        exit_atm();
     }
 }
